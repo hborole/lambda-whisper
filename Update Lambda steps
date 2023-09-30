@@ -1,0 +1,15 @@
+# First build
+
+docker build --platform linux/amd64 -t docker-image:test .
+
+# then tag
+
+docker tag docker-image:test 428134178841.dkr.ecr.us-east-1.amazonaws.com/lambda-whisper:latest
+
+# then push
+
+docker push 428134178841.dkr.ecr.us-east-1.amazonaws.com/lambda-whisper:latest
+
+# update function code 
+
+aws lambda update-function-code --function-name docker-lambda-whisper --profile orakly --image-uri 428134178841.dkr.ecr.us-east-1.amazonaws.com/lambda-whisper:latest
